@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+    <head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Step 4</title>
+	<script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+	<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+	<script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    </head>
+    <body>
+        <div id="cmntbx"></div>
+    </body> 
+    <script type="text/babel">
+        class Comment extends React.Component
+        {
+            render()
+            {
+                return(
+                        <div>
+                            <h1>{this.props.name}</h1>
+                            <textarea>{this.props.commnt}</textarea>
+                        </div>
+                );
+            }
+        }
+        
+        class CommentBox extends React.Component
+        {
+            constructor()
+            {
+                super();
+                this.state = { showComments: true };
+            }
+ 
+            render()
+            {
+                const commntArray = this.getComments();
+                let commentNodes;
+                
+                if (this.state.showComments) 
+                {
+                    commentNodes = <div>{commntArray}</div>;
+                }
+                
+                let buttonText='Show Comments';
+                if(this.state.showComments)
+                {
+                    buttonText='Hide Comments';
+                }
+                
+                return(
+                        <div>
+                            <h1>Show and hide function using states</h1>
+                            <h3>Comments</h3>
+                            <label>{this.cmntCount(commntArray.length)}</label>
+                            <button onClick={this.handleClick.bind(this)}>{buttonText}</button>
+                            {commentNodes}
+                        </div>      
+                );
+            }
+            
+            handleClick()
+            {
+                this.setState({ showComments: !this.state.showComments });
+            }
+            getComments()
+            {
+                const commentList = [
+                    {name: 'Ayush Rustagi', commnt: 'Hello' },
+                    {name: 'Karanam Ashok', commnt: 'Hello World' }
+                ];
+                
+                return commentList.map((commentList) => {
+                    return (
+                            <Comment name={commentList.name} commnt={commentList.commnt} />
+                    );
+                });
+            }
+            
+            cmntCount(commcnt)
+            {
+                if(commcnt >= 2)
+                {
+                    return `${commcnt} comments`;
+                }
+                else if(commcnt == 1)
+                {
+                    return '1 comment';				
+                }
+                else
+                {
+                    return 'No comments';
+                }
+            }
+        }
+        ReactDOM.render(<CommentBox/>, document.getElementById("cmntbx"));
+    </script>
+</html>
