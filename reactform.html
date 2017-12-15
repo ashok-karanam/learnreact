@@ -1,0 +1,416 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+       <meta charset="UTF-8">
+	   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+       <script src="https://unpkg.com/react@15/dist/react.min.js"></script>
+       <script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.24.0/babel.js"></script>
+       
+  </head>
+  <body>
+      <div class="container">
+		<div class="row">
+			<div class="col-md-12 col-lg-12 col-xs-12 col-sm-12">
+				<div class="col-md-3 col-lg-3 col-xs-12 col-sm-12"></div>
+				<div class="col-md-6 col-lg-6 col-xs-12 col-sm-12 brdrs wrapper" id="root"></div>
+				<div class="col-md-3 col-lg-3 col-xs-12 col-sm-12"></div>
+			</div>
+		</div>
+	</div>
+	  
+      <script type="text/babel">
+
+          // M3LAB
+class App extends React.Component{
+  constructor(props){
+    super(props)
+    this.state = {
+          firstname: "",
+           lastname: "",
+           activity: "Cricket",
+       restrictions: [],
+            checked: [false,false,false] ,
+           students: [],
+		   emailid: "",
+		   password:"",
+		   repassword:""
+        }
+    
+    this.restrictions = [ 
+      ["a", ") Dietary Restrictions"  ],
+      ["b", ") Physical Disabilities" ],
+      ["c", ") Medical Needs"         ]
+  ]
+  
+    this.handleFirstNameChange      = this.handleFirstNameChange.bind(this)
+    this.handleLastNameChange       = this.handleLastNameChange.bind(this)
+    this.handleActivitySelect       = this.handleActivitySelect.bind(this)
+    this.handleRestrictionSelection = this.handleRestrictionSelection.bind(this)
+    this.handleRemoveButton         = this.handleRemoveButton.bind(this)
+    this.handleClear                = this.handleClear.bind(this)
+	this.handleEmailChange          = this.handleEmailChange.bind(this)
+	this.handlePasswordChange          = this.handlePasswordChange.bind(this)
+	this.handleRePasswordChange          = this.handleRePasswordChange.bind(this)
+    this.handleSubmit               = this.handleSubmit.bind(this)
+  }
+
+  handleFirstNameChange(event){
+    this.setState({firstname: event.target.value}, () =>
+      console.log(this.state.firstname)
+    )
+  }
+
+  handleEmailChange(event){
+    this.setState({emailid: event.target.value}, () =>
+      console.log(this.state.emailid)
+    )
+  }
+  
+  handleLastNameChange(event){
+    this.setState({lastname: event.target.value}, () =>
+      console.log(this.state.lastname)
+    )
+  }
+  
+  handlePasswordChange(event){
+    this.setState({password: event.target.value}, () =>
+      console.log(this.state.password)
+    )
+  }
+
+  handleRePasswordChange(event){
+    this.setState({repassword: event.target.value}, () =>
+      console.log(this.state.repassword)
+    )
+  }
+  
+  handleActivitySelect(event){
+    this.setState({activity: event.target.value}, () =>
+        console.log(this.state.activity)
+    )
+  }
+
+  handleRestrictionSelection(event){
+    const newSelection = event.target.value
+    let restrictionsTemp 
+    
+    if (this.state.restrictions.indexOf(newSelection) > -1) {
+      restrictionsTemp = this.state.restrictions.filter(s => s !== newSelection)
+    } else {
+      restrictionsTemp = [...this.state.restrictions, newSelection]
+    }
+    
+    this.setState(
+      {       
+        checked: !this.state.checked,
+        restrictions: restrictionsTemp.sort() 
+      }, () => console.log(this.state.restrictions)
+    )
+  }
+  
+  handleRemoveButton(event){
+    var index = event.target.id
+    var studentsTemp = this.state.students.slice()
+    
+    studentsTemp.splice(index, 1)
+    this.setState({
+      students: studentsTemp
+      }, () =>
+      console.log("removed"))
+  }
+  
+  handleClear(event) { 
+    this.setState({
+        firstname: "",
+         lastname: "",
+         activity: "Cricket",
+     restrictions: [],
+          checked: [false,false,false],
+		  emailid:"",
+		  password:"",
+		  repassword:""
+    }, () =>
+        console.log("handleClear "))
+  }
+
+  handleSubmit(event){
+    event.preventDefault()
+    
+    var newStudent = []
+    newStudent[0] = this.state.firstname
+    newStudent[1] = this.state.lastname
+    newStudent[2] = this.state.activity
+    newStudent[3] = this.state.restrictions
+    newStudent[4] = this.state.emailid
+	newStudent[5] = this.state.password
+	newStudent[6] = this.state.repassword
+    var studentsTemp = this.state.students.map(row => row.slice())
+    studentsTemp.push(newStudent)
+    this.setState({students: studentsTemp}, 
+      () => console.log(this.state.students)
+    )
+    this.handleClear(event)
+  } 
+  
+  render() {
+    return (
+      <div>
+	  <h1>React Forms</h1>
+	  <br/>
+        <form onSubmit = {this.handleSubmit}>
+          <FirstNameInput   value = {this.state.firstname}
+                          handler = {this.handleFirstNameChange} />
+						  <br/>
+          <LastNameInput    value = {this.state.lastname}
+                          handler = {this.handleLastNameChange} />
+						  <br/>
+          <ActivitySelect   value = {this.state.activity}
+                          handler = {this.handleActivitySelect} />
+						  <br/>
+          <RestrictionSelection values = {this.restrictions}
+                               checked = {this.state.checked}
+                               handler = {this.handleRestrictionSelection}  />
+                           <br/>
+          <EmailInput   value = {this.state.emailid}
+                          handler = {this.handleEmailChange} />
+                           <br/>
+		  <PasswordInput   value = {this.state.password}
+                          handler = {this.handlePasswordChange} />
+                           <br/>
+          <RePasswordInput   value = {this.state.repassword}
+                          handler = {this.handleRePasswordChange} />
+                           <br/>						   
+          <SubmitButton  disabled = { !((this.state.firstname && this.state.lastname) && (this.state.password===this.state.repassword)) }/>
+        </form>
+		<br/>
+        <Table students = {this.state.students} 
+                handler = {this.handleRemoveButton}/>
+      </div>
+    )
+  }
+} // end of class
+
+// functional components
+function FirstNameInput(props) {
+  var style = {
+    width: "300px",
+   height: "35px"
+  }
+  return (
+    <div id = "firstname" >
+      <label>First Name</label><br />
+      <input type = "text"
+            placeholder="First Name"	  
+            style = {style} 
+            value = {props.value} 
+         onChange = {props.handler} />
+    </div>
+  )
+}
+
+function LastNameInput(props) {
+  var style = {
+    width: "300px",
+   height: "35px"
+  }
+  return (
+    <div id = "lastname" >
+      <label>Last Name</label><br />
+      <input type = "text" 
+	         placeholder="Last Name"
+            style = {style} 
+            value = {props.value} 
+         onChange = {props.handler} />
+    </div>
+  )
+}
+
+function PasswordInput(props) {
+  var style = {
+    width: "300px",
+   height: "35px"
+  }
+  return (
+    <div id = "password" >
+      <label>Enter Password</label><br />
+      <input type = "password"
+			placeholder="Password"
+            style = {style} 
+            value = {props.value} 
+         onChange = {props.handler} />
+    </div>
+  )
+}
+
+function RePasswordInput(props) {
+  var style = {
+    width: "300px",
+   height: "35px"
+  }
+  return (
+    <div id = "repassword" >
+      <label>Re-Enter Password</label><br />
+      <input type = "password"
+			placeholder="Re Enter Password"
+            style = {style} 
+            value = {props.value} 
+         onChange = {props.handler} />
+    </div>
+  )
+}
+
+function ActivitySelect(props) {
+  const activities = [ 
+    "Cricket",
+    "Swimming",
+    "Cooking",
+    "Painting" 
+  ]
+  var style = {
+    width: "300px",
+   height: "35px"
+  }
+  
+  return (
+    <div id = "activity" >
+      <label>Select Activity</label><br />
+      <select value = {props.value} 
+              style = {style} 
+           onChange = {props.handler} >
+        {activities.map( activity =>     
+          <option value = {activity} > {activity} </option>
+        )}
+      </select> 
+    </div>
+  )
+}
+
+function RestrictionSelection(props){
+  return (
+    <div>
+      <label>Check all that apply:</label><br />
+      <Checkbox restriction = {props.values[0]}
+                    checked = {props.checked[0]}
+                    handler = {props.handler} /> 
+      <Checkbox restriction = {props.values[1]}
+                    checked = {props.checked[1]}
+                    handler = {props.handler} /> 
+      <Checkbox restriction = {props.values[2]}
+                    checked = {props.checked[2]}
+                    handler = {props.handler} /> 
+    </div>  
+  )
+}
+
+function Checkbox(props) {
+  return (
+    <span>
+        <input 
+          type = "checkbox"
+       checked = {props.checked}
+         value = {props.restriction[0]} 
+          name = {props.restriction[0]}           
+      onChange = {props.handler}  /> 
+          {props.restriction} 
+        <br /> 
+  </span>
+
+  )
+}
+
+function EmailInput(props) {
+  var style = {
+    width: "300px",
+   height: "35px"
+  }
+  return (
+    <div id = "emailid" >
+      <label>Email</label><br />
+      <input type = "email"
+			placeholder="Email"
+            style = {style} 
+            value = {props.value} 
+         onChange = {props.handler} />
+    </div>
+  )
+}
+
+function SubmitButton(props){
+  var style = {
+    width: "250px"
+  }
+  return (
+    <span>
+      <input type  = "submit"
+             style = {style}     
+          disabled = {props.disabled} 
+             value = "Submit" 
+      />
+    </span>  
+  )
+}
+
+function RemoveButton(props){
+  var style = {
+    width: 24,
+    height: 24
+  }
+  return (
+    <input type = "submit"	
+          style = {style} 
+          value = "X" 
+             id = {props.id} 
+        onClick = {props.handler} />
+  )
+}
+
+function Table(props) {
+  var style = {
+        width: "130%",
+    textAlign: "center"
+  }
+  return (
+    <div id = "table" >
+      <table style = {style}>
+        <tbody>
+          <tr>
+            <th>Remove</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Activity</th>
+            <th>Restrictions</th>
+			<th>Email</th>
+			<th>Password</th>
+			<th>Re Password</th>
+          </tr>
+          {props.students.map ((student, i) =>
+            <tr key = {i}>
+              <td> <RemoveButton handler = {props.handler} 
+                                 id = {i} /> </td>
+              <td> {student[0]} </td>
+              <td> {student[1]} </td>
+              <td> {student[2]} </td>
+              <td> {student[3]} </td>
+			  <td> {student[4]} </td>
+			  <td> {student[5]} </td>
+			  <td> {student[6]} </td>
+            </tr>
+          )}
+        </tbody>
+      </table>
+    </div>
+  )
+}
+
+ReactDOM.render (
+  <App />,
+  document.getElementById('root')
+);
+      </script>
+  
+  </body>
+</html>
