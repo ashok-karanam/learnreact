@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+       <script src="https://unpkg.com/react@15/dist/react.min.js"></script>
+       <script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.24.0/babel.js"></script>
+  <title>Document</title>
+ </head>
+ <body>
+  <div class="container">
+		<div class="row">
+			<div class="col-md-12 col-lg-12 col-xs-12 col-sm-12">
+				<div class="col-md-3 col-lg-3 col-xs-12 col-sm-12"></div>
+				<div class="col-md-6 col-lg-6 col-xs-12 col-sm-12 brdrs wrapper" id="root"></div>
+				<div class="col-md-3 col-lg-3 col-xs-12 col-sm-12"></div>
+			</div>
+		</div>
+	</div>
+
+<script type="text/babel">
+
+class EachOption extends React.Component {
+  render() {
+    const book = this.props.book;
+	const l = this.props.l;
+	var temp=Object.keys(book);
+	var j=0;
+	console.log(temp[j]);
+    return (
+      <tr>
+        <td>{book[temp[j]]}</td>
+        <td>{book[temp[2]]}</td>
+      </tr>
+    );
+  }
+}
+
+class OptionTable extends React.Component {
+  render() {
+    const rows = [];
+	var i=1,randomNumber=0;
+	const books = this.props.books;
+	const l = this.props.l;
+	var book;
+	var maxNumber = 5;
+		while(i<=5)
+		{
+		var randomNumber = Math.floor((Math.random() * maxNumber));
+		rows.push(
+			<EachOption
+				book={books[randomNumber]}
+				l={l}
+			/>
+			);
+          i++;
+        }
+
+    return (
+      <table>
+        <thead>
+          <tr>
+            <th>AuthorName</th>
+            <th>BookName</th>
+          </tr>
+        </thead>
+        <tbody>{rows}</tbody>
+      </table>
+    );
+  }
+}
+
+class AuthorGame extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    const pages = [];
+    var l=1;
+    while(l<=2)
+	  {
+		 pages.push(
+             <OptionTable
+          books={this.props.books}
+          l={this.props.l}
+        />
+		  );
+		  l++;
+	  }
+    return (
+      <div>
+         {pages}
+      </div>
+    );
+  }
+}
+
+
+const BOOKSDATA = [
+  {key1: '1', book1: 'Football1', book2: 'cricket1'},
+  {key1: '2', book1: 'Football2', book2: 'cricket2'},
+  {key1: '3', book1: 'Football3', book2: 'cricket3'},
+  {key1: '4', book1: 'Football4', book2: 'cricket4'},
+  {key1: '5', book1: 'Football5', book2: 'cricket5'},
+  {key1: '6', book1: 'Football6', book2: 'cricket6'},
+  ];
+
+ReactDOM.render (
+  <AuthorGame books={BOOKSDATA} />,
+  document.getElementById('root')
+);
+
+	</script>
+ </body>
+</html>
