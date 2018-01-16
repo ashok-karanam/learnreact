@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+       <script src="https://unpkg.com/react@15/dist/react.min.js"></script>
+       <script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.24.0/babel.js"></script>
+  <title>Document</title>
+ </head>
+ <body>
+  <div class="container">
+		<div class="row">
+			<div class="col-md-12 col-lg-12 col-xs-12 col-sm-12">
+				<div class="col-md-3 col-lg-3 col-xs-12 col-sm-12"></div>
+				<div class="col-md-6 col-lg-6 col-xs-12 col-sm-12 brdrs wrapper" id="root"></div>
+				<div class="col-md-3 col-lg-3 col-xs-12 col-sm-12"></div>
+			</div>
+		</div>
+	</div>
+
+<script type="text/babel">
+
+class BookValidation extends React.Component
+{
+	render() {
+		return (
+		<div>
+                console.log('ValidationTest');
+		</div>
+		);
+	}
+}
+
+class EachOption extends React.Component {
+  render() {
+    const book = this.props.book;
+	const l3 = this.props.l2;
+	var temp=Object.keys(book);
+	var j=1;
+	console.log(temp[j]);
+	console.log('question id '+l3);
+    return (
+      <tr>
+        <td>{book[temp[j]]}</td>
+        <td><button onClick={this.testClick2.bind(this)} id={book[temp[2]]}>{book[temp[2]]}</button></td>
+      </tr>
+    );
+  }
+  testClick2(e)
+	{
+		console.log("Test Button Clicked");
+		console.log(e.target.id);
+	//	var bookname=e.target.id;
+		<BookValidation />
+		console.log("Hello");
+	}
+}
+
+class OptionTable extends React.Component {
+  render() {
+    const rows = [];
+	var i=1,randomNumber=0;
+	const books = this.props.books;
+	const l2 = this.props.l1;
+	var book;
+	var maxNumber = 5;
+		while(i<=5)
+		{
+		var randomNumber = Math.floor((Math.random() * maxNumber));
+		rows.push(
+			<EachOption
+				book={books[randomNumber]}
+				l2={this.props.l2}
+			/>
+			);
+          i++;
+        }
+    return (
+      <table>
+        <thead>
+          <tr>
+            <th>AuthorName</th>
+            <th>BookName</th>
+          </tr>
+        </thead>
+        <tbody>{rows}</tbody>
+      </table>
+    );
+  }
+}
+
+class AuthorName extends React.Component{
+render(){
+const author = this.props.author;
+var temp1=Object.keys(author);
+return(
+      <tr>
+        <td>{author[temp1[0]]}</td>
+      </tr>
+);
+}
+}
+
+class AuthorGame extends React.Component {
+  constructor(props) {
+    super(props);
+	this.state = {
+          
+	}
+  }
+  render() {
+    const pages = [];
+    var l=1;
+    while(l<=2)
+	  {
+		pages.push(
+             <AuthorName 
+          author={AUTHORDATA}
+        />
+		  );
+		 pages.push(
+             <OptionTable
+          books={this.props.books}
+		  l1={this.props.l}
+        />
+		  );
+		  
+		  l++;
+	  }
+    return (
+      <div>
+         {pages}
+      </div>
+    );
+  }
+}
+
+const BOOKSDATA = [
+  {authorname: 'Dennis Riche', key1: '1', book1: 'Football1', book2: 'cricket1'},
+  {authorname: 'laksmikanth', key1: '2', book1: 'Football2', book2: 'cricket2'},
+  {authorname: 'herbert schildt', key1: '3', book1: 'Football3', book2: 'cricket3'},
+  {authorname: 'Mark Allen', key1: '4', book1: 'Football4', book2: 'cricket4'},
+  {authorname: 'Ellis Horowitz', key1: '5', book1: 'Football5', book2: 'cricket5'},
+  {authorname: 'Ramesh Singh', key1: '6', book1: 'Football6', book2: 'cricket6'},
+  ];
+
+  const AUTHORDATA={
+  authorname1: 'Dennis Riche', authorname2: 'Laksmikanth', authorname3: 'Herbert schildt', authorname4: 'Mark Allen', authorname5: 'Ellis Horowitz', 
+  authorname6: 'Ramesh Singh' 
+  };
+
+ReactDOM.render (
+  <AuthorGame books={BOOKSDATA} />,
+  document.getElementById('root')
+);
+
+	</script>
+ </body>
+</html>
