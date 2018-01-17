@@ -1,0 +1,11 @@
+search :  how to remove the applied css after change of state in react
+
+https://stackoverflow.com/questions/41076174/if-clicked-on-another-element-remove-class-with-react
+https://medium.com/@joethedave/achieving-ui-animations-with-react-the-right-way-562fa8a91935
+https://github.com/facebook/react/issues/7142
+Can try ComponentDidMount,ComponentUnMount and others methods
+https://discuss.reactjs.org/t/best-practice-for-modifying-css-of-react-components-parent/3439
+https://www.kirupa.com/react/styling_in_react.htm
+https://www.sean-lan.com/2017/03/20/react-animation/
+https://www.sitepoint.com/style-react-components-styled-components/
+https://reactjs.org/docs/animation.html
