@@ -9,3 +9,6 @@ https://www.kirupa.com/react/styling_in_react.htm
 https://www.sean-lan.com/2017/03/20/react-animation/
 https://www.sitepoint.com/style-react-components-styled-components/
 https://reactjs.org/docs/animation.html
+
+
+https://www.udemy.com/reactjs-and-flux-learn-by-building-10-projects/
