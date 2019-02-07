@@ -79,3 +79,4 @@ React
 
 
 https://medium.com/@ruthmpardee/passing-data-between-react-components-103ad82ebd17
+https://codepen.io/PiotrBerebecki/pen/dpRdKP
