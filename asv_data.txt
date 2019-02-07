@@ -1,0 +1,78 @@
+
+npm install -g live-server
+
+https://github.com/richardsforu/Cognizant-React
+
+to override storage location for mongodb
+mongo file=d:/abc/db
+
+Ironman@3102
+
+
+nodeframework.com
+
+
+
+npm init
+npm install express --save
+
+https://medium.freecodecamp.org/going-out-to-eat-and-understanding-the-basics-of-express-js-f034a029fb66
+
+https://evincedev.com/blog/mean-stack-architecture/
+
+https://angular-templates.io/tutorials/about/learn-how-to-build-a-mean-stack-application
+
+https://loopback.io/doc/en/lb2/Connecting-to-MongoDB.html
+
+https://semaphoreci.com/community/tutorials/getting-started-with-node-js-and-loopback
+
+https://mlab.com/signup/
+
+https://codeburst.io/hitchhikers-guide-to-back-end-development-with-examples-3f97c70e0073
+
+
+compile
+tsc filename.ts
+
+
+
+cd name of the applicaion
+ng serve --open
+ng generate component nameofcomponent
+
+npm install
+
+mg g class classname
+
+*ngIf
+
+angular pipes
+
+cts7
+
+ng generate service servicename
+
+how to add filters like filter some product type
+how to trigger emails
+
+
+https://stackoverflow.com/questions/23766512/how-to-detect-if-there-is-any-file-added-in-a-folder
+
+create-react-app appname
+
+=================================================================================
+
+ES6
+MongoDB
+Node Basics 
+node using Express framework
+
+Angular
+
+Components
+Databinding
+Forms - reactive, template driven
+Routing or Routers
+Http module
+
+React
